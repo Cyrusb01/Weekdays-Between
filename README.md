@@ -20,10 +20,10 @@ python main.py
 ```
 ## Logic Behind System
 
-The first step is determining how many days are in between the two dates. This is done using calculations on how many days are in a specific month, and accounts for leap years.
+The first step is determining how many days are in between the two dates. This is done using calculations on how many days are in a specific month and accounts for leap years.
 
 Once the number of days is found out, we can take this number and divide by 7 to determine how many full weeks lie in between. 
 
-The last part is the difficult part, finding the lefover weekdays. This relies on the Tomohiko Sakamoto algorithm where we can determine what day of the week it is, given the date. 
+The last part is the difficult part: finding the lefover weekdays. This relies on the Tomohiko Sakamoto algorithm where we can determine what day of the week it is, given the date. 
 
 By knowing the day of the week of the start date and end date, we can count the number of partial weekdays left. 
