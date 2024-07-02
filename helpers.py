@@ -139,6 +139,7 @@ def get_weekdays_between(start_date: str, end_date: str):
     # Convert date to int format
     start_day, start_month, start_year = convert_date_to_ints(start_date)
     end_day, end_month, end_year = convert_date_to_ints(end_date)
+    print(f"{start_date}-{end_date}")
 
     if (end_year - start_year) > 20_000_000:
         print("Interesting Input... This might take a while")
@@ -167,19 +168,21 @@ def get_weekdays_between(start_date: str, end_date: str):
 
     """
     In order to determine the leftover weekdays we use the tomohiko sakamoto algorithm 
-    This algorithm determines the day of the week given the date
+    This algorithm determines the day of the week given the date.
+
+    Once we know the weekday we start on, and how many days are not part of a full week. 
+    We iterate through the remaining days to find how many weekdays are left
     """
     start_weekday = tomohiko_sakamoto_algo(
         year=start_year, month=start_month, day=start_day
     )
-    end_weekday = tomohiko_sakamoto_algo(year=end_year, month=end_month, day=end_day)
     weekday_lookup = {0: 0, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 0}
+    left_over_days = num_days_in_between % 7
     curr_day = start_weekday
-    weekdays_in_between += weekday_lookup[curr_day]
-    while curr_day != end_weekday:
-        curr_day += 1
+    for _ in range(left_over_days):
         if curr_day > 6:
             curr_day = 0
         weekdays_in_between += weekday_lookup[curr_day]
+        curr_day += 1
 
     return weekdays_in_between
