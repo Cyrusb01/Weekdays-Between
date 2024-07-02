@@ -22,8 +22,8 @@ python main.py
 
 The first step is determining how many days are in between the two dates. This is done using calculations on how many days are in a specific month and accounts for leap years.
 
-Once the number of days is found out, we can take this number and divide by 7 to determine how many full weeks lie in between. 
+Once the number of days is found out, we can take this number and divide by 7 to determine how many full weeks lie in between. We know there are 5 weekdays in every full week so we can use this number to get a start on how many weekdays there are.
 
 The last part is the difficult part: finding the lefover weekdays. This relies on the Tomohiko Sakamoto algorithm where we can determine what day of the week it is, given the date. 
 
-By knowing the day of the week of the start date and end date, we can count the number of partial weekdays left. 
+By knowing the day of the week of the start date and how many weekdays are not part of a full week, we can determine the leftover weekdays.
