@@ -153,9 +153,6 @@ def get_weekdays_between(start_date: str, end_date: str):
     end_day, end_month, end_year = convert_date_to_ints(end_date)
     print(f"{start_date}-{end_date}")
 
-    if (end_year - start_year) > 20_000_000:
-        print("Interesting Input... This might take a while")
-
     # Check that start date > end date
     if end_year < start_year:
         raise InvalidInput("End date is earlier than start date")
