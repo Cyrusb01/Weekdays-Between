@@ -34,6 +34,20 @@ def tomohiko_sakamoto_algo(month: int, day: int, year: int) -> int:
     return day_of_week
 
 
+def count_leap_years_since(year: int):
+    return year // 4 - year // 100 + year // 400
+
+
+def get_days_in_full_years(start_year, end_year):
+    num_full_years = end_year - start_year - 1
+    # Instead lets calculate how many leap years are in between the two years
+    leap_years_before_start = count_leap_years_since(start_year)
+    leap_years_before_end = count_leap_years_since(end_year - 1)
+    leap_years_in_between = leap_years_before_end - leap_years_before_start
+    days = 365 * num_full_years + leap_years_in_between
+    return days
+
+
 def is_leap_year(year: int) -> bool:
     divisible_by_4 = year % 4 == 0
     end_of_century = year % 100 == 0
@@ -65,10 +79,6 @@ def get_num_days_between_dates(
 ) -> int:
     days = 0
 
-    # Full years
-    for year in range(start_year + 1, end_year):
-        days += 366 if is_leap_year(year) else 365
-
     if start_year == end_year:
         if start_month == end_month:
             days += end_day - start_day + 1
@@ -80,7 +90,9 @@ def get_num_days_between_dates(
             # Days in partial months
             days += get_days_in_month(start_year, start_month) - start_day + 1
             days += end_day
+
     else:
+        days += get_days_in_full_years(start_year, end_year)
         # Full months until end of start year
         for month in range(start_month + 1, 13):
             days += get_days_in_month(start_year, month)
